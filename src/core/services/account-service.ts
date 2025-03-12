@@ -8,23 +8,23 @@ export class AccountService {
   private accounts: Map<string, Account> = new Map();
   private transactions: Transaction[] = [];
 
-  createAccount(name: string, initialBalance: number): Account {
+  createAccount = (name: string, initialBalance: number): Account => {
     const account: Account = { id: uuid(), name, balance: initialBalance };
     this.accounts.set(account.id, account);
     return account;
-  }
+  };
 
-  getBalance(accountId: string): number {
+  getBalance = (accountId: string): number => {
     const account = this.accounts.get(accountId);
     if (!account) throw new BadRequestException('Conta não encontrada');
     return account.balance;
-  }
+  };
 
-  createTransaction(
+  createTransaction = (
     accountId: string,
     type: 'entrada' | 'saída',
     amount: number,
-  ): Transaction {
+  ): Transaction => {
     const account = this.accounts.get(accountId);
     if (!account) throw new BadRequestException('Conta não encontrada');
 
@@ -37,5 +37,5 @@ export class AccountService {
 
     account.balance += type === 'entrada' ? amount : -amount;
     return transaction;
-  }
+  };
 }

@@ -1,5 +1,5 @@
 import { Controller, Post, Body } from '@nestjs/common';
-import { AccountService } from 'src/core/services/account-service';
+import { AccountService } from '../core/services/account-service';
 
 @Controller('transactions')
 export class TransactionController {
