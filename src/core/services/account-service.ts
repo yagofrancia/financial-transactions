@@ -27,6 +27,9 @@ export class AccountService {
   ): Transaction => {
     const account = this.accounts.get(accountId);
     if (!account) throw new BadRequestException('Conta não encontrada');
+    if (type !== 'entrada' && type !== 'saída') {
+      throw new BadRequestException('Tipo de transação inválido');
+    }
 
     if (type === 'saída' && account.balance < amount) {
       throw new BadRequestException('Saldo insuficiente');
