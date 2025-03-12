@@ -25,6 +25,7 @@ export class AccountService {
     type: 'entrada' | 'saída',
     amount: number,
   ): Transaction => {
+    // TODO: organize error handling
     const account = this.accounts.get(accountId);
     if (!account) throw new BadRequestException('Conta não encontrada');
     if (type !== 'entrada' && type !== 'saída') {
