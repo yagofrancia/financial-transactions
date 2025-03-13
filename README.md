@@ -5,7 +5,7 @@
 1. Clone o repositório:
 
    ```bash
-   git clone <URL_DO_REPOSITORIO>
+   git clone https://github.com/yagofrancia/financial-transactions.git
    cd financial-transactions
    ```
 
