@@ -25,12 +25,9 @@ export class AccountService {
     type: 'entrada' | 'saída',
     amount: number,
   ): Transaction => {
-    // TODO: organize error handling
     const account = this.accounts.get(accountId);
     if (!account) throw new BadRequestException('Conta não encontrada');
-    if (type !== 'entrada' && type !== 'saída') {
-      throw new BadRequestException('Tipo de transação inválido');
-    }
+    this.validateTransactionType(type);
 
     if (type === 'saída' && account.balance < amount) {
       throw new BadRequestException('Saldo insuficiente');
@@ -42,4 +39,10 @@ export class AccountService {
     account.balance += type === 'entrada' ? amount : -amount;
     return transaction;
   };
+
+  private validateTransactionType(type: string): void {
+    if (!['entrada', 'saída'].includes(type)) {
+      throw new BadRequestException('Tipo de transação inválido');
+    }
+  }
 }
